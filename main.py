@@ -2,7 +2,7 @@
 
 ''' Verifica em strings de mesmo tamanho'''
 
-''' Verifica strings de tamanhos diferentes'''
+''' Verifica strings de tamanhos diferentes com apenas 1 ocorrência'''
 
 def ver(fa,fb):
     novafb, novafa, difsa, difsb = '','', '', ''
@@ -55,9 +55,9 @@ def ver(fa,fb):
     else:
         return novafa + novafb
 
-assert ver('abcd','abef') == 'ab[ef]''ab[cd]'
-assert ver('olae','olea') == 'ol[ea]''ol[ae]'
-assert ver('xyzw','xywz') == 'xy[wz]''xy[zw]'
+assert all((ver('abcd','abef') == 'ab[ef]''ab[cd]',
+            ver('olae','olea') == 'ol[ea]''ol[ae]',
+            ver('xyzw','xywz') == 'xy[wz]''xy[zw]'))
 
 assert all((ver('abcd','abc') == 'abc[]''abc[d]',
             ver('123','1234') == '123[4]''123[]',
