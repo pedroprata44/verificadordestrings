@@ -1,20 +1,33 @@
 '''Verifica strings de tamanhos iguais e destaca diferenças entre [] com várias ocorrências'''
 
 def ver(fa,fb):
-    fna, fnb = '', ''
- 
+    novafa, novafb, desta, destb = '', '', '', ''
+
     for i in range(len(fa)):
         if fa[i] != fb[i]:
-            fna += f'[{fb[i]}]'
-            fnb += f'[{fa[i]}]'
+            desta += fb[i]
+            destb += fa[i]
+
+            if i == range(len(fa))[-1]:
+                novafa += f'[{desta}]'
+                novafb += f'[{destb}]'
+            
             continue
-        
-        fna += fa[i]
-        fnb += fa[i]
 
-    return fna + fnb
+        if desta != '':
+            novafa += f'[{desta}]{fa[i]}'
+            novafb += f'[{destb}]{fa[i]}'
+            desta, destb = '', ''
+            continue
 
-assert ver('abcd','accb') == 'a[c]c[b]a[b]c[d]'
+        novafa += fa[i]
+        novafb += fa[i]
+
+    return f'{novafa + novafb}'
+
+assert all((ver('oo','ii') == '[ii][oo]',
+            ver('ll','mm') == '[mm][ll]',
+            ver('aa','bb') == '[bb][aa]'))
 
 assert all((ver('kj','lj') == '[l]j[k]j',
             ver('oo','io') == '[i]o[o]o',
